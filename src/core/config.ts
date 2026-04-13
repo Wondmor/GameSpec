@@ -1,8 +1,8 @@
-export const OPENSPEC_DIR_NAME = 'openspec';
+export const GAMESPEC_DIR_NAME = 'gamespec';
 
-export const OPENSPEC_MARKERS = {
-  start: '<!-- OPENSPEC:START -->',
-  end: '<!-- OPENSPEC:END -->'
+export const GAMESPEC_MARKERS = {
+  start: '<!-- GAMESPEC:START -->',
+  end: '<!-- GAMESPEC:END -->'
 };
 
 export interface OpenSpecConfig {

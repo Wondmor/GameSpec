@@ -57,8 +57,8 @@ function getCommandPath(command: Command): string {
 }
 
 program
-  .name('openspec')
-  .description('AI-native system for spec-driven development')
+  .name('gamespec')
+  .description('GameSpec - AI-native spec-driven development for game development')
   .version(version);
 
 // Global options

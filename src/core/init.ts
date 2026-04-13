@@ -1,7 +1,7 @@
 /**
  * Init Command
  *
- * Sets up OpenSpec with Agent Skills and /opsx:* slash commands.
+ * Sets up GameSpec with Agent Skills and /gamespec:* slash commands.
  * This is the unified setup command that replaces both the old init and experimental commands.
  */
 
@@ -14,7 +14,7 @@ import { FileSystemUtils } from '../utils/file-system.js';
 import { transformToHyphenCommands } from '../utils/command-references.js';
 import {
   AI_TOOLS,
-  OPENSPEC_DIR_NAME,
+  GAMESPEC_DIR_NAME,
   AIToolOption,
 } from './config.js';
 import { PALETTE } from './styles/palette.js';
@@ -104,11 +104,11 @@ export class InitCommand {
 
   async execute(targetPath: string): Promise<void> {
     const projectPath = path.resolve(targetPath);
-    const openspecDir = OPENSPEC_DIR_NAME;
-    const openspecPath = path.join(projectPath, openspecDir);
+    const gamespecDir = GAMESPEC_DIR_NAME;
+    const gamespecPath = path.join(projectPath, gamespecDir);
 
     // Validation happens silently in the background
-    const extendMode = await this.validate(projectPath, openspecPath);
+    const extendMode = await this.validate(projectPath, gamespecPath);
 
     // Check for legacy artifacts and handle cleanup
     await this.handleLegacyCleanup(projectPath, extendMode);
@@ -452,14 +452,14 @@ export class InitCommand {
   // DIRECTORY STRUCTURE
   // ═══════════════════════════════════════════════════════════
 
-  private async createDirectoryStructure(openspecPath: string, extendMode: boolean): Promise<void> {
+  private async createDirectoryStructure(gamespecPath: string, extendMode: boolean): Promise<void> {
     if (extendMode) {
       // In extend mode, just ensure directories exist without spinner
       const directories = [
-        openspecPath,
-        path.join(openspecPath, 'specs'),
-        path.join(openspecPath, 'changes'),
-        path.join(openspecPath, 'changes', 'archive'),
+        gamespecPath,
+        path.join(gamespecPath, 'specs'),
+        path.join(gamespecPath, 'changes'),
+        path.join(gamespecPath, 'changes', 'archive'),
       ];
 
       for (const dir of directories) {
@@ -468,13 +468,13 @@ export class InitCommand {
       return;
     }
 
-    const spinner = this.startSpinner('Creating OpenSpec structure...');
+    const spinner = this.startSpinner('Creating GameSpec structure...');
 
     const directories = [
-      openspecPath,
-      path.join(openspecPath, 'specs'),
-      path.join(openspecPath, 'changes'),
-      path.join(openspecPath, 'changes', 'archive'),
+      gamespecPath,
+      path.join(gamespecPath, 'specs'),
+      path.join(gamespecPath, 'changes'),
+      path.join(gamespecPath, 'changes', 'archive'),
     ];
 
     for (const dir of directories) {
@@ -483,7 +483,7 @@ export class InitCommand {
 
     spinner.stopAndPersist({
       symbol: PALETTE.white('▌'),
-      text: PALETTE.white('OpenSpec structure created'),
+      text: PALETTE.white('GameSpec structure created'),
     });
   }
 
@@ -595,9 +595,9 @@ export class InitCommand {
   // CONFIG FILE
   // ═══════════════════════════════════════════════════════════
 
-  private async createConfig(openspecPath: string, extendMode: boolean): Promise<'created' | 'exists' | 'skipped'> {
-    const configPath = path.join(openspecPath, 'config.yaml');
-    const configYmlPath = path.join(openspecPath, 'config.yml');
+  private async createConfig(gamespecPath: string, extendMode: boolean): Promise<'created' | 'exists' | 'skipped'> {
+    const configPath = path.join(gamespecPath, 'config.yaml');
+    const configYmlPath = path.join(gamespecPath, 'config.yml');
     const configYamlExists = fs.existsSync(configPath);
     const configYmlExists = fs.existsSync(configYmlPath);
 
@@ -685,13 +685,13 @@ export class InitCommand {
 
     // Config status
     if (configStatus === 'created') {
-      console.log(`Config: openspec/config.yaml (schema: ${DEFAULT_SCHEMA})`);
+      console.log(`Config: gamespec/config.yaml (schema: ${DEFAULT_SCHEMA})`);
     } else if (configStatus === 'exists') {
       // Show actual filename (config.yaml or config.yml)
-      const configYaml = path.join(projectPath, OPENSPEC_DIR_NAME, 'config.yaml');
-      const configYml = path.join(projectPath, OPENSPEC_DIR_NAME, 'config.yml');
+      const configYaml = path.join(projectPath, GAMESPEC_DIR_NAME, 'config.yaml');
+      const configYml = path.join(projectPath, GAMESPEC_DIR_NAME, 'config.yml');
       const configName = fs.existsSync(configYaml) ? 'config.yaml' : fs.existsSync(configYml) ? 'config.yml' : 'config.yaml';
-      console.log(`Config: openspec/${configName} (exists)`);
+      console.log(`Config: gamespec/${configName} (exists)`);
     } else {
       console.log(chalk.dim(`Config: skipped (non-interactive mode)`));
     }

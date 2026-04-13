@@ -1,7 +1,7 @@
 /**
  * Update Command
  *
- * Refreshes OpenSpec skills and commands for configured tools.
+ * Refreshes GameSpec skills and commands for configured tools.
  * Supports profile-aware updates, delivery changes, migration, and smart update detection.
  */
 
@@ -12,7 +12,7 @@ import * as fs from 'fs';
 import { createRequire } from 'module';
 import { FileSystemUtils } from '../utils/file-system.js';
 import { transformToHyphenCommands } from '../utils/command-references.js';
-import { AI_TOOLS, OPENSPEC_DIR_NAME } from './config.js';
+import { AI_TOOLS, GAMESPEC_DIR_NAME } from './config.js';
 import {
   generateCommands,
   CommandAdapterRegistry,
@@ -81,11 +81,11 @@ export class UpdateCommand {
 
   async execute(projectPath: string): Promise<void> {
     const resolvedProjectPath = path.resolve(projectPath);
-    const openspecPath = path.join(resolvedProjectPath, OPENSPEC_DIR_NAME);
+    const gamespecPath = path.join(resolvedProjectPath, GAMESPEC_DIR_NAME);
 
-    // 1. Check openspec directory exists
-    if (!await FileSystemUtils.directoryExists(openspecPath)) {
-      throw new Error(`No OpenSpec directory found. Run 'openspec init' first.`);
+    // 1. Check gamespec directory exists
+    if (!await FileSystemUtils.directoryExists(gamespecPath)) {
+      throw new Error(`No GameSpec directory found. Run 'gamespec init' first.`);
     }
 
     // 2. Perform one-time migration if needed before any legacy upgrade generation.

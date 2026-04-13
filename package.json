@@ -1,21 +1,23 @@
 {
-  "name": "@fission-ai/openspec",
-  "version": "1.3.0",
-  "description": "AI-native system for spec-driven development",
+  "name": "gamespec",
+  "version": "1.0.0",
+  "description": "GameSpec - Spec-driven development for AI-assisted game development, based on OpenSpec",
   "keywords": [
-    "openspec",
+    "gamespec",
     "specs",
     "cli",
     "ai",
+    "game-development",
+    "godot",
     "development"
   ],
-  "homepage": "https://github.com/Fission-AI/OpenSpec",
+  "homepage": "https://github.com/Wondmor/GameSpec",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Fission-AI/OpenSpec"
+    "url": "https://github.com/Wondmor/GameSpec"
   },
   "license": "MIT",
-  "author": "OpenSpec Contributors",
+  "author": "GameSpec Contributors",
   "type": "module",
   "publishConfig": {
     "access": "public"
