@@ -1,6 +1,10 @@
 MIT License
 
+Copyright (c) 2026 GameSpec Contributors
 Copyright (c) 2024 OpenSpec Contributors
+
+GameSpec is based on OpenSpec by Fission-AI.
+See https://github.com/Fission-AI/OpenSpec for the original project.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
